@@ -6,9 +6,10 @@ img = Image.open('alpha1.bmp')
 img = img.convert('L')
 content = img.load()
 y = 310
+size = img.size[0]
 
 string = []
-for i in range(2800):
+for i in range(size):
     if content[i, y] == 0:
         string.append(str(1))
     else:
