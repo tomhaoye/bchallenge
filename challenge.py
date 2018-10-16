@@ -29,7 +29,7 @@ img.close()
 
 res = []
 for x in range(len(g_channel)):
-    color = int(al_channel[x]) ^ int(g_channel[x])
+    color = int(g_channel[x]) ^ int(al_channel[x])
     res.append(str(color))
 
 print hex(int(''.join(res), 2))[2:-1].decode('hex')
