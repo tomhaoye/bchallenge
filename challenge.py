@@ -7,37 +7,29 @@ content = img.load()
 y = 310
 size = img.size[0]
 
-c_string = []
+g_string = []
 for i in range(size):
-    c_string.append(str(bin(content[i, y][0])[-1]))
-
-or_channel = ''.join(c_string)[:2800]
+    g_string.append(str(bin(content[i, y][0])[-1]))
+g_channel = ''.join(g_string)
 img.close()
 
-img = Image.open('alpha1.bmp')
-img = img.convert('L')
+img = Image.open('alpha.bmp')
 content = img.load()
 y = 310
 size = img.size[0]
 
 a_string = []
 for i in range(size):
-    if content[i, y] == 0:
+    if content[i, y][0] == 0:
         a_string.append(str(1))
     else:
         a_string.append(str(0))
-
 al_channel = ''.join(a_string)
-
 img.close()
 
 res = []
-for x in range(len(or_channel)):
-    new_channel = int(or_channel[x]) ^ int(al_channel[x])
-    res.append(str(new_channel))
+for x in range(len(g_channel)):
+    color = int(al_channel[x]) ^ int(g_channel[x])
+    res.append(str(color))
 
-final = ''.join(res)
-final = final.replace('1', '2')
-final = final.replace('0', '1')
-final = final.replace('2', '0')
-print(hex(int(final, 2))[2:-1].decode('hex'))
+print hex(int(''.join(res), 2))[2:-1].decode('hex')
